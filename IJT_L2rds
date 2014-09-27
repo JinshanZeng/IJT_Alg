@@ -11,8 +11,7 @@ function [x, cpu_time] = IJT_L2rds(A, y, lambda, x0, MaxIterNum)
 % MaxIterNum    - Maximal iteration number
 %% Output %%%%%%%%%%
 % x            - Recovery
-% runningtime  - Running time in second
-% iter         - Iterative number
+% cpu_time     - running time of the algorithm
 %
 warning off all;
 %% Start running
