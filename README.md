@@ -1,7 +1,7 @@
 IJT_Alg
 =======
 
-Matlab code for Iterative Jumping Thresholding Algorithm, an algorithm for fast solution 
+Matlab code for Iterative Jumping Thresholding (IJT) Algorithm, an algorithm for fast solution 
 of the general non-convex regularization problems.
 
 IJT algorithm for tow specific sparse regularization models, i.e., L1/2 and L2/3 
