@@ -1,0 +1,35 @@
+%@ Edited by Jinshan Zeng, School of Mathematics&Stastics, Xi'an Jiaotong University, 
+% email: jsh.zeng@gmail.com, date: Sep. 27, 2014
+%Test code for IJT algorithm
+% Applying IJT algorithm to the sparse signal recovery problem
+clear all; close all; clc;
+%
+k=15; % Sparsity Level
+n = 500; % dimension of signal
+m = 256; % number of measurements
+
+A = randn(m,n)/sqrt(m); % Generate the gaussian matrix
+
+% Generate the sparse signal
+x0 = zeros(n,1);
+Tr_C = 2*randn(k,1);
+RandP = randperm(n);
+x0(RandP(1:k)) = Tr_C;
+
+y = A*x0; % Generate the measurements
+lambda =0.015;
+%Init_x = zeros(n,1);
+Init_x = randn(n,1);
+MaxIterNum = 2000;
+% Recovered by IJT algorithm
+[IJT_LHalf_x, IJT_LHalf_cputime] = IJT_LHalf(A,y,lambda,Init_x,MaxIterNum);
+[IJT_L2rds_x, IJT_L2rds_cputime] = IJT_L2rds(A,y,lambda,Init_x,MaxIterNum);
+
+IJT_LHalf_RecErr = norm(IJT_LHalf_x -x0)^2; % Recovery error of IJT algorithm for L1/2 regularization
+IJT_L2rds_RecErr = norm(IJT_L2rds_x -x0)^2; % Recovery error of IJT algorithm for L2/3 regularization
+
+figure, plot(IJT_LHalf_x,'r-*');
+hold on; plot(IJT_L2rds_x,'b-o');
+hold on; plot(x0, 'k-d');
+legend('IJT for L1/2', 'IJT for L2/3', 'True Signal');
+axis tight;
